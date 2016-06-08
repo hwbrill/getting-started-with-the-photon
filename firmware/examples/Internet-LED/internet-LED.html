@@ -1,0 +1,63 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+<style type="text/css">
+      .on  { background:green; }
+      .off { background:red; }
+
+ 	  input[type=button] {
+		 color: white;
+		 font-size: 2.5em;
+ 	 }
+</style>
+
+<script>
+var accessToken = "c4031f3003bbee24bff1c563e822db4413db31f1";
+var deviceID = "2b0040000a47343337373738"
+var url = "https://api.spark.io/v1/devices/" + deviceID + "/led";
+
+function toggleState(item) {
+	function setLED(message) {
+		$.post(url, {params: message, access_token: accessToken }, callback);
+	}
+	function callback(data, status) {
+		if (data.return_value == 1) {
+			if (item.className == "on") {
+				item.className = "off";
+			}
+			else {
+				item.className = "on";
+			}
+		}
+		else {
+			alert("Could not Connect to Photon");
+		}
+	}
+	if (item.className == "on") {
+		setLED("off");
+	}	else {
+		setLED("on");
+		}
+}
+/* function ledOn()
+{
+	$.post(url, {params: "on", access_token: accessToken });
+}
+function ledOff()
+{
+	$.post(url, {params: "off", access_token: accessToken });
+} */
+
+</script>
+</head>
+
+<body>
+
+<h1>On/Off Control</h1>
+
+<input type="button" id="btn" value="Blink LED 1" class="off" onClick="toggleState(this)" /> <br/>
+<!-- <input type="button" onClick="ledOff()" value="OFF"/> -->
+
+</body>
+</html>
