@@ -1,6 +1,6 @@
 String message = "";
 
-int ledPin = D0;
+int ledPin = D7;
 int switchPin = D1;
 
 int pezoPin = A4;
